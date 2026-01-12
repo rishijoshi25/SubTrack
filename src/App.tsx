@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import AuthProvider from './auth/AuthProvider';
-import { useAuth } from './auth/UseAuth';
 import './App.css';
+import Overview from './components/dashboard/Overview';
+import { useAuth } from './auth/useAuth';
 
 const AuthForm = (): React.JSX.Element => {
   const [isSignUp, setIsSignUp] = useState<boolean>(false);
@@ -133,5 +134,5 @@ const AppContent: React.FC = () => {
     );
   }
 
-  return user ? <Dashboard /> : <AuthForm />;
+  return user ? <Overview /> : <AuthForm />;
 };
