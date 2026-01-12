@@ -15,13 +15,6 @@
   gap: 16px;
 }
 
-.overview-title {
-  font-size: 32px;
-  font-weight: 700;
-  color: #2D3561;
-  margin: 0;
-}
-
 .category-filter {
   display: flex;
   align-items: center;
@@ -90,6 +83,11 @@
   font-size: 14px;
   color: #9ca3af;
   margin: 0;
+}
+
+.subtrack-logo-with-text {
+    width: 250px;
+    height: 150px;
 }
 
 /* Responsive */

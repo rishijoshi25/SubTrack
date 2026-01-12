@@ -34,7 +34,7 @@ export default function Overview(){
   return (
     <div className="overview">
       <div className="overview-header">
-        <h1 className="overview-title">Dashboard Overview</h1>
+        <img src="src/assets/imgs/subtrack_logo_with_text.png" className="subtrack-logo-with-text"/>
         
         <div className="category-filter">
           <label htmlFor="category-select">Filter by Category:</label>
