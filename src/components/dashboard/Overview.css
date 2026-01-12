@@ -1,3 +1,5 @@
+/* src/styles/Overview.css */
+
 .overview {
   padding: 32px;
   max-width: 1400px;
@@ -24,25 +26,31 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  background: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
 }
 
 .category-filter label {
   font-size: 14px;
-  font-weight: 500;
-  color: #6b7280;
+  font-weight: 600;
+  color: #2D3561;
+  white-space: nowrap;
 }
 
 .category-dropdown {
-  padding: 10px 16px;
-  border: 2px solid #e5e7eb;
-  border-radius: 8px;
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
   font-size: 14px;
   font-weight: 500;
   color: #2D3561;
-  background: white;
+  background-color: #f9fafb;
   cursor: pointer;
-  transition: border-color 0.2s;
+  transition: all 0.2s;
   outline: none;
+  min-width: 180px;
 }
 
 .category-dropdown:hover {
@@ -84,6 +92,7 @@
   margin: 0;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
   .overview {
     padding: 20px;

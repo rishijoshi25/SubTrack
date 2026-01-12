@@ -10,6 +10,7 @@ import {
 } from "../../utils/subscriptionUtils";
 import { mockSubscriptions } from "../../data/mockSubscriptions";
 import MetricCard from "./MetricCard";
+import './Overview.css';
 
 export default function Overview(){
     const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
@@ -39,11 +40,11 @@ export default function Overview(){
           <label htmlFor="category-select">Filter by Category:</label>
           <select
             id="category-select"
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value as Category | 'All')}
+            value={selectedCategory || ''}
+            onChange={(e) => setSelectedCategory(e.target.value as Category | null)}
             className="category-dropdown"
           >
-            <option value="All">All Categories</option>
+            <option value="">All Categories</option>
             <option value="Entertainment">Entertainment</option>
             <option value="Business">Business</option>
             <option value="Fitness">Fitness</option>
