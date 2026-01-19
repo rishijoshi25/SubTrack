@@ -1,8 +1,77 @@
 import React, { useState } from 'react';
 import AuthProvider from './auth/AuthProvider';
 import './App.css';
-import Overview from './components/dashboard/Overview';
 import { useAuth } from './auth/useAuth';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import Dashboard from './components/dashboard/Dashboard';
+import AddSubscription from './components/sidebar/AddSubscription';
+import Subscriptions from './components/sidebar/Subscriptions';
+
+export default function App(){
+  function AppRoutes() {
+    const {user, loading} = useAuth();
+
+    if(loading){
+      return (
+        <div style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          alignItems: 'center', 
+          height: '100vh',
+          fontSize: '18px',
+          color: '#6b7280'
+        }}>
+          Loading...
+        </div>
+      );
+    }
+
+    return (
+      <Routes>
+        {/* Public route - Auth Form */}
+        <Route 
+          path="/login" 
+          element={!user ? <AuthForm /> : <Navigate to="/dashboard" replace />} 
+        />
+
+        {/* Protected routes */}
+        <Route 
+          path="/dashboard" 
+          element={user ? <Dashboard /> : <Navigate to="/login" replace />} 
+        />
+        <Route 
+          path="/subscriptions" 
+          element={user ? <Subscriptions /> : <Navigate to="/login" replace />} 
+        />
+        <Route 
+          path="/add-subscription" 
+          element={user ? <AddSubscription /> : <Navigate to="/login" replace />} 
+        />
+
+        {/* Default redirect - go to dashboard if logged in, login if not */}
+        <Route 
+          path="/" 
+          element={<Navigate to={user ? "/dashboard" : "/login"} replace />} 
+        />
+
+        {/* Catch all - redirect to home */}
+        <Route 
+          path="*" 
+          element={<Navigate to="/" replace />} 
+        />
+      </Routes>
+    );
+  }
+
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <AppRoutes />
+      </AuthProvider>
+    </BrowserRouter>
+  );
+}
+
 
 const AuthForm = (): React.JSX.Element => {
   const [isSignUp, setIsSignUp] = useState<boolean>(false);
@@ -85,54 +154,4 @@ const AuthForm = (): React.JSX.Element => {
       </div>
     </div>
   );
-};
-
-const Dashboard: React.FC = () => {
-  const { user, signOut } = useAuth();
-
-  return (
-    <div className="dashboard">
-      <nav className="navbar">
-        <div className="navbar-content">
-          <h1 className="navbar-title">Dashboard</h1>
-          <button onClick={signOut} className="btn btn-danger">
-            Sign Out
-          </button>
-        </div>
-      </nav>
-
-      <main className="main-content">
-        <div className="card">
-          <h2 className="card-title">Welcome!</h2>
-          <div className="user-info">
-            <p><strong>Email:</strong> {user?.email}</p>
-            <p><strong>User ID:</strong> {user?.id}</p>
-            <p><strong>Created:</strong> {user?.created_at ? new Date(user.created_at).toLocaleDateString() : 'N/A'}</p>
-          </div>
-        </div>
-      </main>
-    </div>
-  );
-};
-
-export default function App() {
-  return (
-    <AuthProvider>
-      <AppContent />
-    </AuthProvider>
-  );
 }
-
-const AppContent: React.FC = () => {
-  const { user, loading } = useAuth();
-
-  if (loading) {
-    return (
-      <div className="loading-container">
-        <div className="loading-text">Loading...</div>
-      </div>
-    );
-  }
-
-  return user ? <Overview /> : <AuthForm />;
-};
