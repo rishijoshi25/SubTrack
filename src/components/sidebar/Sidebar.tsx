@@ -39,7 +39,7 @@ export default function Sidebar({userEmail, onSignOut}: SidebarProps){
                 className='mobile-menu-button'
                 onClick={toggleMobileMenu}
             >
-                {isMobileOpen ? <X size={24} />: <Menu size={24} />}
+                {isMobileOpen ? <X size={24} />: <Menu size={20} />}
             </button>
 
             {isMobileOpen && (
@@ -61,7 +61,7 @@ export default function Sidebar({userEmail, onSignOut}: SidebarProps){
                         className='toggle-button desktop-only'
                         onClick={toggleSidebar}
                     >
-                        <Menu size={20} />
+                        <Menu size={14} />
                     </button>
                 </div>
 
