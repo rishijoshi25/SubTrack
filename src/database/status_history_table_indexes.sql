@@ -1,0 +1,3 @@
+create index idx_status_history_subscription_id on subscription_status_history(subscription_id);
+create index idx_status_history_user_id on subscription_status_history(user_id);
+create index idx_status_history_changed_at on subscription_status_history(changed_at desc);
