@@ -1,0 +1,40 @@
+.dashboard-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f3f4f6;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: 260px; /* Width of expanded sidebar */
+  padding: 32px;
+  transition: margin-left 0.3s ease;
+  min-height: 100vh;
+  /* Responsive: fills available space up to 1080p, then caps */
+  max-width: 1600px; /* 1660px - perfect for 1080p */
+}
+
+/* When sidebar is collapsed */
+.sidebar.collapsed ~ .main-content {
+  margin-left: 80px;
+  max-width: 1840px; /* 1840px when collapsed */
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding: 80px 20px 20px 20px; /* Extra top padding for hamburger button */
+    max-width: 100%; /* Full width on mobile */
+  }
+
+  .sidebar.collapsed ~ .main-content {
+    margin-left: 0;
+  }
+}
+
+/* Optional: Add smooth transitions for content */
+.main-content > * {
+  max-width: 100%;
+  margin: 0 auto;
+}
