@@ -45,3 +45,14 @@ export interface SubscriptionStatusHistory {
   price_at_change?: number;
   billing_cycle_at_change?: BillingCycle;
 }
+
+export interface SubscriptionFormData {
+  name: string;
+  price: number | string; // Allow string for input handling, will convert to number
+  billing_cycle: BillingCycle;
+  category: Category;
+  next_billing_date: string;
+  status: SubscriptionStatus;
+  trial_end_date?: string;
+  description?: string;
+}
