@@ -1,0 +1,158 @@
+.subscription-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 2px solid transparent;
+}
+
+.subscription-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.subscription-card.urgent {
+  border-color: #ef4444;
+  background: #fef2f2;
+}
+
+.subscription-card.upcoming {
+  border-color: #f59e0b;
+  background: #fffbeb;
+}
+
+.card-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.logo-placeholder {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.subscription-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.status-active {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.status-trial {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.status-paused {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.status-cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.subscription-cost {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.category-tag {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #f3f4f6;
+  color: #4b5563;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  width: fit-content;
+}
+
+.billing-date {
+  font-size: 14px;
+  color: #6b7280;
+  margin: 0;
+}
+
+.billing-alert {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+
+.subscription-card.urgent .billing-alert {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.subscription-card.upcoming .billing-alert {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.manage-button {
+  background: #4f46e5;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.manage-button:hover {
+  background: #4338ca;
+}
+
+.manage-button:active {
+  transform: scale(0.98);
+}
