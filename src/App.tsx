@@ -4,8 +4,8 @@ import './App.css';
 import { useAuth } from './auth/useAuth';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Dashboard from './components/dashboard/Dashboard';
-import AddSubscription from './components/sidebar/AddSubscription';
-import Subscriptions from './components/sidebar/Subscriptions';
+import AddSubscription from './components/subscriptions/AddSubscription';
+import Subscriptions from './components/subscriptions/Subscriptions';
 
 export default function App(){
   function AppRoutes() {
