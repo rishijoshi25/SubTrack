@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm, type SubmitHandler } from "react-hook-form";
 import type { SubscriptionFormData, BillingCycle, Category, SubscriptionStatus } from '../../../types/subscription';
 import './SubscriptionForm.css';
@@ -11,7 +11,7 @@ interface SubscriptionFormProps {
 }
 
 export default function SubscriptionForm( {initialData, onSubmit, onCancel, submitLabel}: SubscriptionFormProps ) {
-    const { register, handleSubmit, watch, formState: { errors, isSubmitting }} = useForm<SubscriptionFormData>({
+    const { register, handleSubmit, watch, setValue, formState: { errors, isSubmitting }} = useForm<SubscriptionFormData>({
         defaultValues: initialData || {
             name: '',
             price: '',
@@ -24,7 +24,23 @@ export default function SubscriptionForm( {initialData, onSubmit, onCancel, subm
         }
     });
 
-    const billing_cycle = watch();
+    const billing_cycle = watch('billing_cycle');
+
+    useEffect(() => {
+        const now = new Date();
+        const nextDate = new Date(now);
+        
+        if (billing_cycle === 'monthly') {
+            nextDate.setMonth(nextDate.getMonth() + 1);
+        } else if (billing_cycle === 'yearly') {
+            nextDate.setFullYear(nextDate.getFullYear() + 1);
+        }
+
+        const formattedDate = nextDate.toISOString().split('T')[0];
+        setValue('next_billing_date', formattedDate);
+    }, [billing_cycle, setValue]);
+
+    
     const statusValue = watch('status');
 
     const handleIncomingFormData = async (data: SubscriptionFormData) => {
