@@ -4,6 +4,7 @@ import type { Subscription } from '../../types/subscription';
 import DashboardLayout from '../dashboard/DashboardLayout';
 import { supabase } from '../../lib/supabase';
 import SubscriptionCard from './SubscriptionCard';
+import SubscriptionFilters from './SubscriptionFilters';
 import './Subscriptions.css'
 
 export default function Subscriptions() {
@@ -18,6 +19,7 @@ export default function Subscriptions() {
   };
 
   const [subscriptions, setSubscriptions] = useState<Subscription[]>([]);
+  const [filteredSubscriptions, setFilteredSubscriptions] = useState<Subscription[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -41,6 +43,7 @@ export default function Subscriptions() {
       if (fetchError) throw fetchError;
 
       setSubscriptions(data || []);
+      setFilteredSubscriptions(data || []);
     }
     catch(err) {
       console.error('Error fetching subscriptions:', err);
@@ -54,6 +57,10 @@ export default function Subscriptions() {
   const handleManageSubscription = (subscription: Subscription) => {
     
   }
+
+  const handleFilteredChange = (filtered: Subscription[]) => {
+    setFilteredSubscriptions(filtered);
+  };
 
   if (loading) {
     return (
@@ -116,15 +123,29 @@ export default function Subscriptions() {
               </div>
             ) : 
             (
-              <div className="subscriptions-grid">
-                {subscriptions.map((subscription) => (
-                  <SubscriptionCard
-                    key={subscription.id}
-                    subscription={subscription}
-                    onManage={handleManageSubscription}
-                  />))
-                }
-              </div>
+              <>
+                <SubscriptionFilters
+                  subscriptions={subscriptions}
+                  onFilteredChange={handleFilteredChange}
+                />
+                {filteredSubscriptions.length === 0 ? (
+                  <div className="no-results-state">
+                    <h3>No subscriptions match your filters</h3>
+                    <p>Try adjusting your search or filters to see more results.</p>
+                  </div>
+                ) : 
+                (
+                  <div className="subscriptions-grid">
+                    {filteredSubscriptions.map((subscription) => (
+                      <SubscriptionCard
+                        key={subscription.id}
+                        subscription={subscription}
+                        onManage={handleManageSubscription}
+                      />
+                    ))}
+                  </div>
+                )}
+              </>
             )
           }
         </div>
